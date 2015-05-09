@@ -1,0 +1,38 @@
+pemagination: a (virtual) tour into portable bits and executable bytes
+----------------------------------------------------------------------
+
+
+how to build (quick)
+--------------------
+
+git clone git://midipix.org/pemagine &&
+mkdir pemagine_build &&
+cd pemagine_build &&
+../pemagine/configure --prefix=$PREFIX &&
+make &&
+make install
+
+
+supported targets
+-----------------
++ x86_64-nt64-midipix (default)
++ x86_64-w64-mingw32
++ i686-nt32-midipix
++ i686-w64-mingw32
+
+
+supported compilers
+-------------------
++ gcc
++ clang
++ Visual Studio
+
+
+IDE project files (forthcoming)
+-------------------------------
++ CodeLite
++ Code::Blocks
++ Visual Studio
+
+* above project files will not be part of the project
+  repository, but rather distributed separately.
