@@ -1,0 +1,28 @@
+# package
+lz_package=pemagine
+
+
+# toolchain
+lz_default_target=x86_64-nt64-midipix
+lz_default_arch=x86_64
+lz_default_compiler=gcc
+
+
+# lazy
+lz_cflags_cmdline=
+lz_cxxflags_cmdline=
+lz_ldflags_cmdline=
+
+lz_cflags_debug=
+lz_cflags_release=
+
+lz_cflags_include_first=
+lz_cflags_include_last=
+lz_cflags_include_cmdline=
+lz_cxxflags_include_cmdline=
+
+lz_exec_prefix=
+lz_bindir=
+lz_libdir=
+lz_includedir=
+lz_syslibdir=

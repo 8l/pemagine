@@ -1,0 +1,128 @@
+lz_project_rules()
+{
+	lz_rules="all install xstatic install_xstatic"
+}
+
+lz_project_definitions()
+{
+	pemagine_lib_name=libpemagine
+	pemagine_so_name="$lz_build_dir/lib/$pemagine_lib_name$lz_dylib_ext"
+	pemagine_a_name="$lz_build_dir/lib/$pemagine_lib_name$lz_stlib_ext"
+	pemagine_so_def_name="$lz_build_dir/lib/$pemagine_lib_name$lz_libdef_ext"
+	pemagine_implib_name="$lz_build_dir/lib/$pemagine_lib_name$lz_implib_ext"
+
+	lz_cflags_common="-DMIDIPIX_FREESTANDING
+			-D__NT$lz_arch_bits \
+			-UWIN32 -U_WIN32 -U__WIN32 -U__WIN32__ \
+			-UWIN64 -U_WIN64 -U__WIN64 -U__WIN64__ \
+			-Werror=all -fno-builtin -ffreestanding"
+
+
+	# lz_cflags_extra="-Os -fno-stack-protector -fomit-frame-pointer -fno-unwind-tables -fno-asynchronous-unwind-tables"
+
+	pemagine_so_ldflags="-shared --image-base=0x560000 \
+				--entry "$lz_default_underscore"pe_lib_entry_point@12 \
+				--exclude-all-symbols \
+				--output-def $pemagine_so_def_name \
+				--out-implib $pemagine_implib_name \
+				--subsystem=windows"
+
+	lz_cflags_include_common="-I$lz_project_dir/src/internal -I$lz_project_dir/include"
+
+	if [ "$MIDIPIX_ROOT"x != x ]; then
+		lz_cflags_include_common="$lz_cflags_include_common -I$MIDIPIX_ROOT/include"
+	fi
+
+	pemagine_so_obj_list=pemagine.so.objs
+	pemagine_so_src_list=pemagine.so.src.lst
+
+	pemagine_a_obj_list=pemagine.a.objs
+	pemagine_a_src_list=pemagine.a.src.lst
+}
+
+pemagine_shared()
+{
+	lz_src_dirs="src"
+	lz_cflags_step="-DPE_BUILD"
+
+	if ! [ "$lz_pecoff_winnt"x = yesx ]; then
+		lz_cflags_step="$lz_cflags_step -fpic"
+	fi
+
+	lz_compile "$pemagine_so_obj_list" "$pemagine_so_src_list" "$lz_dyobj_ext"
+        lz_link    "$pemagine_so_obj_list" "$pemagine_so_src_list" "$pemagine_so_name" \
+			"$pemagine_so_ldflags" \
+			''
+}
+
+
+pemagine_static()
+{
+	lz_src_dirs="src"
+
+	lz_compile "$pemagine_a_obj_list" "$pemagine_a_src_list" "$lz_stobj_ext"
+        lz_archive "$pemagine_a_obj_list" "$pemagine_a_src_list" "$pemagine_a_name"
+}
+
+
+pemagine_xstatic()
+{
+	lz_src_dirs="src"
+	lz_cflags_step="-DPE_BUILD"
+
+	lz_compile "$pemagine_a_obj_list" "$pemagine_a_src_list" "$lz_stobj_ext"
+        lz_archive "$pemagine_a_obj_list" "$pemagine_a_src_list" "$pemagine_a_name"
+}
+
+
+pemagine_install_headers()
+{
+	lz_pushd $lz_project_dir
+
+	cp -r -t $lz_prefix/include include/$lz_project_name
+
+	lz_popd
+}
+
+
+pemagine_install_shared()
+{
+	lz_pushd $lz_build_dir/lib
+
+	cp -t $lz_prefix/lib $pemagine_lib_name$lz_dylib_ext
+	cp -t $lz_prefix/lib $pemagine_lib_name$lz_implib_ext
+
+	lz_popd
+}
+
+
+pemagine_install_static()
+{
+	lz_pushd $lz_build_dir/lib
+
+	cp -t $lz_prefix/lib $pemagine_lib_name$lz_stlib_ext
+
+	lz_popd
+}
+
+
+pemagine_install_xstatic()
+{
+	lz_step pemagine_xstatic
+	lz_step pemagine_install_static
+}
+
+pemagine_all()
+{
+	lz_step pemagine_shared
+	lz_step pemagine_static
+}
+
+
+pemagine_install()
+{
+	lz_step pemagine_all
+	lz_step pemagine_install_shared
+	lz_step pemagine_install_static
+	lz_step pemagine_install_headers
+}
