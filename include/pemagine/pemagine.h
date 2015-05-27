@@ -156,6 +156,8 @@ pe_api struct pe_image_dos_hdr *pe_get_image_dos_hdr_addr	(const void * base);
 pe_api struct pe_coff_file_hdr *pe_get_image_coff_hdr_addr	(const void * base);
 pe_api union  pe_opt_hdr *	pe_get_image_opt_hdr_addr	(const void * base);
 pe_api struct pe_data_dirs *	pe_get_image_data_dirs_addr	(const void * base);
+pe_api struct pe_sec_hdr *	pe_get_image_section_tbl_addr	(const void * base);
+pe_api struct pe_sec_hdr *	pe_get_image_named_section_addr	(const void * base, const char * name);
 pe_api struct pe_export_hdr *	pe_get_image_export_hdr_addr	(const void * base, uint32_t * sec_size);
 pe_api struct pe_import_hdr *	pe_get_image_import_dir_addr	(const void * base, uint32_t * sec_size);
 pe_api void *			pe_get_image_special_hdr_addr	(const void * base, uint32_t ordinal, uint32_t * sec_size);
