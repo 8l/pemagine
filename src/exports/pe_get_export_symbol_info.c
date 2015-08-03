@@ -23,7 +23,7 @@ int pe_get_export_symbol_info(
 {
 	struct pe_export_hdr *	exp_hdr;
 
-	size_t		len;
+	ssize_t		len;
 	uint32_t *	rva_offset;
 	uintptr_t *	addr_offset;
 

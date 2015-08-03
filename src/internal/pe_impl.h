@@ -12,6 +12,6 @@ struct pe_block {
 	uint32_t	size;
 };
 
-uint32_t	pe_impl_strlen_ansi(const char * str);
-uint32_t	pe_impl_strlen_utf16(const wchar16_t * str);
+int32_t		pe_impl_strlen_ansi(const char * str);
+int32_t		pe_impl_strlen_utf16(const wchar16_t * str);
 wchar16_t	pe_impl_utf16_char_to_lower(const wchar16_t c);

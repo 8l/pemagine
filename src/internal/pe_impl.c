@@ -8,7 +8,7 @@
 #include <pemagine/pemagine.h>
 #include "pe_impl.h"
 
-uint32_t pe_impl_strlen_ansi(const char * str)
+int32_t pe_impl_strlen_ansi(const char * str)
 {
 	char * ch;
 	char * upper_bound;
@@ -25,7 +25,7 @@ uint32_t pe_impl_strlen_ansi(const char * str)
 }
 
 
-uint32_t pe_impl_strlen_utf16(const wchar16_t * str)
+int32_t pe_impl_strlen_utf16(const wchar16_t * str)
 {
 	wchar16_t *	wch;
 	wchar16_t *	upper_bound;
