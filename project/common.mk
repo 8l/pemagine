@@ -11,7 +11,7 @@ COMMON_SRCS = \
 	src/headers/pe_get_image_special_hdr_addr.c \
 	src/imports/pe_enum_image_import_hdrs.c \
 	src/internal/pe_impl.c \
-	src/internal/pe_lib_entry_point.c \
+	src/internal/pe_entry_point.c \
 	src/meta/pe_get_image_stack_heap_info.c \
 	src/meta/pe_get_symbol_module_info.c \
 	src/meta/pe_get_symbol_name.c \
