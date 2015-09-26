@@ -8,14 +8,17 @@ how to build (quick)
 git clone git://midipix.org/pemagine &&
 mkdir pemagine_build &&
 cd pemagine_build &&
-../pemagine/configure --prefix=$PREFIX &&
+../pemagine/configure --host=$HOST &&
 make &&
-make install
+make DESTDIR=$DESTDIR install
+
+* native builds are supported (leave out --host).
+* both in-tree and out-of-tree builds are supported.
 
 
 supported targets
 -----------------
-+ x86_64-nt64-midipix (default)
++ x86_64-nt64-midipix
 + x86_64-w64-mingw32
 + i686-nt32-midipix
 + i686-w64-mingw32
