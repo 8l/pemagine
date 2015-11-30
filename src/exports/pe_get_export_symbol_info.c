@@ -101,7 +101,7 @@ int pe_get_export_symbol_info(
 		idx    = (lower + upper) / 2;
 		rva_offset = (uint32_t *)pe_va_from_rva(fn_names,idx*sizeof(uint32_t));
 		exp_name   = (char *)pe_va_from_rva(base,*rva_offset);
-		
+
 		src = name;
 		dst = exp_name;
 
