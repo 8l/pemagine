@@ -39,7 +39,7 @@ int pe_get_export_symbol_info(
 	char *		exp_name;
 	const char *	src;
 	const char *	dst;
-	size_t		match;
+	ssize_t		match;
 
 	uint32_t	lower;
 	uint32_t	upper;
