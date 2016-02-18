@@ -35,7 +35,6 @@ static char * pe_get_imported_symbol_info_64(
 	void **				sym_image_addr,
 	char **				sym_name,
 	struct pe_ldr_tbl_entry **	ldr_tbl_entry);
-;
 #endif
 
 pe_api
