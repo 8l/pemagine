@@ -83,7 +83,7 @@ $(LIBDIR)/%$(OS_LIB_SUFFIX):
 
 $(LIBDIR)/%$(OS_ARCHIVE_EXT):
 		rm -f $@
-		$(AR) -rcs $@ $^
+		$(AR) rcs $@ $^
 
 
 
