@@ -162,8 +162,13 @@ clean:
 		rm -f $(SHARED_IMPLIB)
 
 
-.display:	.display-env .display-tools .display-flags \
+.display:	.display-project .display-env .display-tools .display-flags \
 		.display-pe .display-elf .display-dirs .display-build
+
+.display-project:
+		@echo PROJECT_DIR:'            '$(PROJECT_DIR)
+		@echo BUILD_DIR:'              '$(CURDIR)
+		@echo
 
 .display-env:
 		@echo BUILD:'                  '$(BUILD)
@@ -257,5 +262,5 @@ clean:
 		install-shared install-static install-implib \
 		install-headers \
 		clean distclean \
-		.display-env .display-tools .display-flags \
+		.display-project .display-env .display-tools .display-flags \
 		.display-pe .display-elf .display-dirs .display-build
