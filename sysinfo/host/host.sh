@@ -10,7 +10,7 @@ host_test()
 	mb_hdrdir=$(pwd)/build
 	mkdir -p $mb_hdrdir || exit 2
 
-	if [ x"$mb_compiler" = x ]; then
+	if [ -z "$mb_compiler" ]; then
                 echo "config error: compiler not set."
 		exit 2
 	fi
