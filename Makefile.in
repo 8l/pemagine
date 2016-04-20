@@ -38,7 +38,6 @@ EXEC_PREFIX 		= @exec_prefix@
 BINDIR 			= @bindir@
 LIBDIR 			= @libdir@
 INCLUDEDIR 		= @includedir@
-SYSLIBDIR 		= @syslibdir@
 MANDIR 			= @mandir@
 DOCDIR 			= @docdir@
 LIBEXECDIR 		= @libexecdir@
@@ -240,7 +239,6 @@ clean:
 		@echo BINDIR:'                 '$(BINDIR)
 		@echo LIBDIR:'                 '$(LIBDIR)
 		@echo INCLUDEDIR:'             '$(INCLUDEDIR)
-		@echo SYSLIBDIR:'              '$(SYSLIBDIR)
 		@echo MANDIR:'                 '$(MANDIR)
 		@echo DOCDIR:'                 '$(DOCDIR)
 		@echo LIBEXECDIR:'             '$(LIBEXECDIR)
