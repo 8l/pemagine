@@ -87,6 +87,9 @@ static int pe_enum_exports_callback(
 {
 	struct pe_symbol_name_ctx * ctx;
 
+	(void)base;
+	(void)exp_hdr;
+
 	if (reason != PE_CALLBACK_REASON_ITEM)
 		return 1;
 
