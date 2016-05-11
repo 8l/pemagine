@@ -21,7 +21,6 @@ host_test()
 	exit 2
 }
 
-
 # one: args
 for arg ; do
 	case "$arg" in

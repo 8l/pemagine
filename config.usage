@@ -4,6 +4,9 @@ supported switches:
 -------------------
 	--help
 
+	--nickname
+	--avoid-version
+
 	--prefix
 	--exec-prefix
 	--bindir
@@ -24,9 +27,27 @@ supported switches:
 	--shell
 	--debug
 
+	--strict
+	--ccstrict
+	--ldstrict
+
+	--all-static
+	--all-shared
+	--enable-static
+	--enable-shared
+	--disable-static
+	--disable-shared
+
+	--enable-app
+	--enable-frontend
+	--disable-app
+	--disable-frontend
+
 
 supported variables:
 --------------------
+	NICKNAME
+
 	PREFIX
 	EXEC_PREFIX
 	BINDIR
@@ -57,6 +78,8 @@ supported variables:
 	CFLAGS_CONFIG
 	CFLAGS_SYSROOT
 	CFLAGS_PATH
+	CFLAGS_STRICT
+	CFLAGS_UTIL
 
 	LDFLAGS
 	LDFLAGS_DEBUG
@@ -65,6 +88,8 @@ supported variables:
 	LDFLAGS_CONFIG
 	LDFLAGS_SYSROOT
 	LDFLAGS_PATH
+	LDFLAGS_STRICT
+	LDFLAGS_UTIL
 
 	PE_SUBSYSTEM
 	PE_IMAGE_BASE

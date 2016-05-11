@@ -1,6 +1,3 @@
-# direct linker invocation
-LDFLAGS_SYSROOT = $(CFLAGS_SYSROOT)
-
-ifneq ($(PE_SUBSYSTEM)x,x)
-	LDFLAGS_COMMON += --subsystem=$(PE_SUBSYSTEM)
+ifneq ($(PE_SUBSYSTEM),)
+	LDFLAGS_COMMON += -Wl,--subsystem=$(PE_SUBSYSTEM)
 endif
