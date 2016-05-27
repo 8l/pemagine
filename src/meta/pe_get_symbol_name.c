@@ -150,31 +150,24 @@ static char * pe_get_imported_symbol_info_64(
 	struct symbol *			sym;
 
 	fn_name  = 0;
-	mod_info = 0;
 	sym = (struct symbol *)sym_addr;
 
 	if ((sym->call == 0xff) && (sym->ds == 0x25)) {
-		sym_offset = (uint32_t *)sym->sym_addr;
+		if ((sym_offset = (uint32_t *)sym->sym_addr)) {
+			offset   = *sym_offset;
+			sym_addr = *(void **)(offset + (uintptr_t)(++sym_offset));
+		} else
+			sym_addr = 0;
 
-		if (sym_offset) {
-			offset		= *sym_offset;
-			sym_addr	= *(void **)(offset + (uintptr_t)(++sym_offset));
-			mod_info	= pe_get_symbol_module_info(sym_addr);
-		}
-
-		if (mod_info)
-			mod_base = mod_info->dll_base;
-		else
-			mod_base = (void *)0;
-
-		if (mod_base)
-			fn_name = pe_get_symbol_name(mod_base,sym_addr);
+		if (sym_addr && (mod_info = pe_get_symbol_module_info(sym_addr)))
+			if ((mod_base = mod_info->dll_base))
+				fn_name = pe_get_symbol_name(
+					mod_base,
+					sym_addr);
 	}
 
-	if (fn_name) {
-		if (ldr_tbl_entry)
-			*ldr_tbl_entry = mod_info;
-	}
+	if (fn_name && ldr_tbl_entry)
+		*ldr_tbl_entry = mod_info;
 
 	return fn_name;
 }
