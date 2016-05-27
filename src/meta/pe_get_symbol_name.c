@@ -112,26 +112,16 @@ static char * pe_get_imported_symbol_info_32(
 	struct symbol *			sym;
 
 	fn_name  = 0;
-	mod_info = 0;
 	sym = (struct symbol *)sym_addr;
 
-	if ((sym->call == 0xff) && (sym->ds == 0x25)) {
-		sym_redirected_addr = (uint32_t ***)sym->sym_addr;
-
-		if (sym_redirected_addr)
-			mod_info = pe_get_symbol_module_info(**sym_redirected_addr);
-
-		if (mod_info)
-			mod_base = mod_info->dll_base;
-		else
-			mod_base = (void *)0;
-
-		if (mod_base)
-			fn_name = pe_get_symbol_name(
-				mod_base,
-				**sym_redirected_addr);
-	}
-
+	if ((sym->call == 0xff) && (sym->ds == 0x25))
+		if ((sym_redirected_addr = (uint32_t ***)sym->sym_addr))
+			if ((mod_info = pe_get_symbol_module_info(
+					**sym_redirected_addr)))
+				if ((mod_base = mod_info->dll_base))
+					fn_name = pe_get_symbol_name(
+						mod_base,
+						**sym_redirected_addr);
 	if (fn_name && ldr_tbl_entry)
 		*ldr_tbl_entry = mod_info;
 
