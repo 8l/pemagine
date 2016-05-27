@@ -178,8 +178,6 @@ pe_api int			pe_enum_image_import_hdrs	(const void * base,
 pe_api char *			pe_get_symbol_name		(const void * base, const void * sym_addr);
 pe_api struct pe_ldr_tbl_entry *pe_get_symbol_module_info	(const void * sym_addr);
 pe_api char *			pe_get_import_symbol_info	(const void * sym_addr,
-								 void ** sym_image_addr,
-								 char ** sym_name,
 								 struct pe_ldr_tbl_entry ** ldr_tbl_entry);
 
 pe_api int			pe_enum_modules_in_load_order	(pe_enum_modules_callback *, void * ctx);

@@ -24,16 +24,12 @@ static int pe_enum_exports_callback(
 #if defined (__NT32)
 static char * pe_get_imported_symbol_info_32(
 	const void *			sym_addr,
-	void **				sym_image_addr,
-	char **				sym_name,
 	struct pe_ldr_tbl_entry **	ldr_tbl_entry);
 #endif
 
 #if defined (__NT64)
 static char * pe_get_imported_symbol_info_64(
 	const void *			sym_addr,
-	void **				sym_image_addr,
-	char **				sym_name,
 	struct pe_ldr_tbl_entry **	ldr_tbl_entry);
 #endif
 
@@ -59,21 +55,15 @@ char * pe_get_symbol_name(const void * base, const void * sym_addr)
 pe_api
 char * pe_get_import_symbol_info(
 	const void *			sym_addr,
-	void **				sym_image_addr,
-	char **				sym_name,
 	struct pe_ldr_tbl_entry **	ldr_tbl_entry)
 {
 	#if defined(__NT32)
 		return pe_get_imported_symbol_info_32(
 			sym_addr,
-			sym_image_addr,
-			sym_name,
 			ldr_tbl_entry);
 	#elif defined (__NT64)
 		return pe_get_imported_symbol_info_64(
 			sym_addr,
-			sym_image_addr,
-			sym_name,
 			ldr_tbl_entry);
 	#endif
 }
@@ -106,8 +96,6 @@ static int pe_enum_exports_callback(
 #ifdef __NT32
 static char * pe_get_imported_symbol_info_32(
 	const void *			sym_addr,
-	void **				sym_image_addr,
-	char **				sym_name,
 	struct pe_ldr_tbl_entry **	ldr_tbl_entry)
 {
 	struct symbol {
@@ -155,8 +143,6 @@ static char * pe_get_imported_symbol_info_32(
 #ifdef __NT64
 static char * pe_get_imported_symbol_info_64(
 	const void *			sym_addr,
-	void **				sym_image_addr,
-	char **				sym_name,
 	struct pe_ldr_tbl_entry **	ldr_tbl_entry)
 {
 	struct symbol {
@@ -198,12 +184,6 @@ static char * pe_get_imported_symbol_info_64(
 	if (fn_name) {
 		if (ldr_tbl_entry)
 			*ldr_tbl_entry = mod_info;
-
-		if (sym_image_addr)
-			*sym_image_addr = (void *)sym_addr;
-
-		if (sym_name)
-			*sym_name = fn_name;
 	}
 
 	return fn_name;
