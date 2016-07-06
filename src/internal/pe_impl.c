@@ -36,7 +36,7 @@ int32_t pe_impl_strlen_utf16(const wchar16_t * str)
 	for (wch = (wchar16_t *)str; (wch < upper_bound) && (*wch); wch++);
 
 	if (wch < upper_bound)
-		return (uint32_t)(wch - str);
+		return ((uint32_t)(wch - str)) * sizeof(wchar16_t);
 	else
 		return -1;
 }
